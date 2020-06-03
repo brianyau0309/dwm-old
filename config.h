@@ -89,7 +89,7 @@ static Key keys[] = {
   /* modifier                     key           function        argument */
   { MODKEY,                       XK_semicolon, spawn,          {.v = dmenucmd } },
   { MODKEY,                       XK_t,         spawn,          {.v = termcmd } },
-  
+
   // Script
   { MODKEY,                       XK_w,         spawn,          SHCMD("$BROWSER") },
   { MODKEY,                       XK_Return,    spawn,          SHCMD("st -e nnn -edH ~") },
@@ -115,6 +115,14 @@ static Key keys[] = {
   { MODKEY,                       XK_q,         killclient,     {0} },
   { MODKEY,                       XK_f,         togglefullscr,  {0}  },
   { MODKEY,                       XK_space,     togglefloating, {0} },
+ 	{ MODKEY|ShiftMask,             XK_j,         moveresize,     {.v = "0x 0y 0w 25h" } },
+ 	{ MODKEY|ShiftMask,             XK_k,         moveresize,     {.v = "0x 0y 0w -25h" } },
+ 	{ MODKEY|ShiftMask,             XK_l,         moveresize,     {.v = "0x 0y 25w 0h" } },
+ 	{ MODKEY|ShiftMask,             XK_h,         moveresize,     {.v = "0x 0y -25w 0h" } },
+	{ MODKEY|ControlMask,           XK_j,         moveresize,     {.v = "0x 25y 0w 0h" } },
+ 	{ MODKEY|ControlMask,           XK_k,         moveresize,     {.v = "0x -25y 0w 0h" } },
+ 	{ MODKEY|ControlMask,           XK_l,         moveresize,     {.v = "25x 0y 0w 0h" } },
+ 	{ MODKEY|ControlMask,           XK_h,         moveresize,     {.v = "-25x 0y 0w 0h" } },
 	{ MODKEY|ControlMask,           XK_q,         moveplace,      {.ui = WIN_NW }},
 	{ MODKEY|ControlMask,           XK_w,         moveplace,      {.ui = WIN_N  }},
 	{ MODKEY|ControlMask,           XK_e,         moveplace,      {.ui = WIN_NE }},
