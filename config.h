@@ -10,11 +10,12 @@ static const unsigned int gappov    = 6;        /* vert outer gap between window
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { 
+static const char *fonts[]          = {
   "Source Code Pro:pixelsize=15:antialias=true:autohint=true",
   "NotoCJK:pixelsize=15:antialias=true:autohint=true",
   "JoyPixels:pixelsize=13:antialias=true:autohint=true",
-  "Symbola:pixelsize=13:antialias=true:autohint=true"
+  "Symbola:pixelsize=13:antialias=true:autohint=true",
+  "Symbols Nerd Font:pixelsize=14:antialias=true:autohint=true"
 };
 static const char dmenufont[]       = "Source Code Pro:pixelsize=15:antialias=true:autohint=true";
 static const char col_gray1[]       = "#202020";
@@ -87,10 +88,11 @@ static const char *termcmd[]  = { "st", NULL };
 static Key keys[] = {
   /* modifier                     key           function        argument */
   { MODKEY,                       XK_semicolon, spawn,          {.v = dmenucmd } },
-  { MODKEY,                       XK_Return,    spawn,          {.v = termcmd } },
+  { MODKEY,                       XK_t,         spawn,          {.v = termcmd } },
   
   // Script
   { MODKEY,                       XK_w,         spawn,          SHCMD("$BROWSER") },
+  { MODKEY,                       XK_Return,    spawn,          SHCMD("st -e nnn -edH ~") },
   { MODKEY,                       XK_e,         spawn,          SHCMD("emoji") },
   { MODKEY,                       XK_n,         spawn,          SHCMD("dunsttoggle") },
   { MODKEY,                       XK_m,         spawn,          SHCMD("ac toggle") },
@@ -113,6 +115,15 @@ static Key keys[] = {
   { MODKEY,                       XK_q,         killclient,     {0} },
   { MODKEY,                       XK_f,         togglefullscr,  {0}  },
   { MODKEY,                       XK_space,     togglefloating, {0} },
+	{ MODKEY|ControlMask,           XK_q,         moveplace,      {.ui = WIN_NW }},
+	{ MODKEY|ControlMask,           XK_w,         moveplace,      {.ui = WIN_N  }},
+	{ MODKEY|ControlMask,           XK_e,         moveplace,      {.ui = WIN_NE }},
+	{ MODKEY|ControlMask,           XK_a,         moveplace,      {.ui = WIN_W  }},
+	{ MODKEY|ControlMask,           XK_s,         moveplace,      {.ui = WIN_C  }},
+	{ MODKEY|ControlMask,           XK_d,         moveplace,      {.ui = WIN_E  }},
+	{ MODKEY|ControlMask,           XK_z,         moveplace,      {.ui = WIN_SW }},
+	{ MODKEY|ControlMask,           XK_x,         moveplace,      {.ui = WIN_S  }},
+	{ MODKEY|ControlMask,           XK_c,         moveplace,      {.ui = WIN_SE }},
 
   // Layout
   { MODKEY|ShiftMask,             XK_f,         setlayout,      {.v = &layouts[0]} },
