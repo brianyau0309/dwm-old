@@ -49,6 +49,7 @@ static const Rule rules[] = {
    */
   /* class         instance    title       tags mask     isfloating   monitor */
   { "Thunar",      NULL,       NULL,       0,            1,           -1 },
+  { "nnn",         NULL,       NULL,       0,            1,           -1 },
   { "discord",     NULL,       NULL,       0,            1,           -1 },
 };
 
@@ -60,8 +61,8 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 static const Layout layouts[] = {
   /* first entry is default */
   /* symbol     arrange function */
-  { "><>",      NULL },    /* no layout function means floating behavior */
   { "[]=",      tile },
+  { "><>",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
   { "|M|",      centeredmaster },
   { ">M>",      centeredfloatingmaster },
@@ -115,14 +116,14 @@ static Key keys[] = {
   { MODKEY,                       XK_q,         killclient,     {0} },
   { MODKEY,                       XK_f,         togglefullscr,  {0}  },
   { MODKEY,                       XK_space,     togglefloating, {0} },
- 	{ MODKEY|ShiftMask,             XK_j,         moveresize,     {.v = "0x 0y 0w 25h" } },
- 	{ MODKEY|ShiftMask,             XK_k,         moveresize,     {.v = "0x 0y 0w -25h" } },
- 	{ MODKEY|ShiftMask,             XK_l,         moveresize,     {.v = "0x 0y 25w 0h" } },
- 	{ MODKEY|ShiftMask,             XK_h,         moveresize,     {.v = "0x 0y -25w 0h" } },
-	{ MODKEY|ControlMask,           XK_j,         moveresize,     {.v = "0x 25y 0w 0h" } },
- 	{ MODKEY|ControlMask,           XK_k,         moveresize,     {.v = "0x -25y 0w 0h" } },
- 	{ MODKEY|ControlMask,           XK_l,         moveresize,     {.v = "25x 0y 0w 0h" } },
- 	{ MODKEY|ControlMask,           XK_h,         moveresize,     {.v = "-25x 0y 0w 0h" } },
+	{ MODKEY|ShiftMask,             XK_j,         moveresize,     {.v = "0x 25y 0w 0h" } },
+ 	{ MODKEY|ShiftMask,             XK_k,         moveresize,     {.v = "0x -25y 0w 0h" } },
+ 	{ MODKEY|ShiftMask,             XK_l,         moveresize,     {.v = "25x 0y 0w 0h" } },
+ 	{ MODKEY|ShiftMask,             XK_h,         moveresize,     {.v = "-25x 0y 0w 0h" } },
+ 	{ MODKEY|ControlMask,           XK_j,         moveresize,     {.v = "0x 0y 0w 25h" } },
+ 	{ MODKEY|ControlMask,           XK_k,         moveresize,     {.v = "0x 0y 0w -25h" } },
+ 	{ MODKEY|ControlMask,           XK_l,         moveresize,     {.v = "0x 0y 25w 0h" } },
+ 	{ MODKEY|ControlMask,           XK_h,         moveresize,     {.v = "0x 0y -25w 0h" } },
 	{ MODKEY|ControlMask,           XK_q,         moveplace,      {.ui = WIN_NW }},
 	{ MODKEY|ControlMask,           XK_w,         moveplace,      {.ui = WIN_N  }},
 	{ MODKEY|ControlMask,           XK_e,         moveplace,      {.ui = WIN_NE }},
