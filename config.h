@@ -3,6 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 3;        /* horiz inner gap between windows */
 static const unsigned int gappiv    = 3;        /* vert inner gap between windows */
 static const unsigned int gappoh    = 6;        /* horiz outer gap between windows and screen edge */
@@ -47,11 +48,12 @@ static const Rule rules[] = {
    *	WM_CLASS(STRING) = instance, class
    *	WM_NAME(STRING) = title
    */
-  /* class         instance         title                  tags mask     isfloating   monitor */
-  { "Thunar",      NULL,            NULL,                  0,            1,           -1 },
-  { "st-256color", "st-256color",   "nnn",                 0,            1,           -1 },
-  { "discord",     NULL,            NULL,                  0,            1,           -1 },
-  { NULL,          NULL,            "Picture in picture",  0,            1,           -1 },
+  /* class         instance         title                  tags mask     isfloating  isterminal  noswallow   monitor */
+	{ "st-256color", "st-256color",   NULL,                  0,            0,          1,          -1,         -1 },
+  { "st-256color", "st-256color",   "nnn",                 0,            1,          1,          -1,         -1 },
+  { "Thunar",      NULL,            NULL,                  0,            1,          0,          0,          -1 },
+  { "discord",     NULL,            NULL,                  0,            1,          0,          0,          -1 },
+  { NULL,          NULL,            "Picture in picture",  0,            1,          0,          0,          -1 },
 };
 
 /* layout(s) */
