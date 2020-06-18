@@ -53,7 +53,8 @@ static const Rule rules[] = {
   { "st-256color", "st-256color",   "nnn",                 0,            1,          1,          -1,         -1 },
   { "Thunar",      NULL,            NULL,                  0,            1,          0,          0,          -1 },
   { "discord",     NULL,            NULL,                  0,            1,          0,          0,          -1 },
-  { NULL,          NULL,            "Picture in picture",  0,            1,          0,          0,          -1 },
+  { NULL,          NULL,            "Picture in picture",  0,            1,          0,          1,          -1 },
+ 	{ NULL,          NULL,            "Event Tester",        0,            0,          0,          1,          -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -138,8 +139,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_c,         moveplace,      {.ui = WIN_SE }},
 
   // Layout
-  { MODKEY|ShiftMask,             XK_f,         setlayout,      {.v = &layouts[0]} },
-  { MODKEY|ShiftMask,             XK_t,         setlayout,      {.v = &layouts[1]} },
+  { MODKEY|ShiftMask,             XK_t,         setlayout,      {.v = &layouts[0]} },
+  { MODKEY|ShiftMask,             XK_f,         setlayout,      {.v = &layouts[1]} },
   { MODKEY|ShiftMask,             XK_m,         setlayout,      {.v = &layouts[2]} },
   { MODKEY|ShiftMask,             XK_c,         setlayout,      {.v = &layouts[3]} },
   { MODKEY|ShiftMask,             XK_o,         setlayout,      {.v = &layouts[4]} },
