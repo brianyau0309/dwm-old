@@ -12,7 +12,7 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
-  "Source Code Pro:pixelsize=15:antialias=true:autohint=true",
+  "CascadiaCode:pixelsize=15:antialias=true:autohint=true",
   "NotoCJK:pixelsize=15:antialias=true:autohint=true",
   "JoyPixels:pixelsize=13:antialias=true:autohint=true",
   "Symbola:pixelsize=13:antialias=true:autohint=true",
