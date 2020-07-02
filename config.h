@@ -52,6 +52,7 @@ static const Rule rules[] = {
 	{ "st-256color", "st-256color",   NULL,                  0,            0,          1,          -1,         -1 },
   { "st-256color", "st-256color",   "nnn",                 0,            1,          1,          -1,         -1 },
   { "st-256color", "st-256color",   "mocp",                0,            1,          1,          -1,         -1 },
+  { "st-256color", "st-256color",   "pulsemixer",          0,            1,          1,          -1,         -1 },
   { "Thunar",      NULL,            NULL,                  0,            1,          0,          0,          -1 },
   { "discord",     NULL,            NULL,                  0,            1,          0,          0,          -1 },
   { NULL,          NULL,            "Picture in picture",  0,            1,          0,          1,          -1 },
@@ -99,7 +100,8 @@ static Key keys[] = {
   // Open
   { MODKEY,                       XK_w,                      spawn,          SHCMD("$BROWSER") },
   { MODKEY,                       XK_Return,                 spawn,          SHCMD("st -e nnn -edH ~") },
-  { MODKEY|ControlMask,           XK_m,                      spawn,          SHCMD("st -e mocp -M ~/.config/moc") },
+  { MODKEY,                       XK_m,                      spawn,          SHCMD("st -e mocp -M ~/.config/moc") },
+  { MODKEY,                       XK_v,                      spawn,          SHCMD("st -e pulsemixer") },
   // moc
   { MODKEY,                       XK_p,                      spawn,          SHCMD("mocp -M ~/.config/moc --toggle-pause && refstatus") },
   { MODKEY,                       XK_bracketleft,            spawn,          SHCMD("mocp -M ~/.config/moc --previous") },
@@ -107,6 +109,7 @@ static Key keys[] = {
 
   // Script
   { MODKEY,                       XK_e,                      spawn,          SHCMD("emoji") },
+  { MODKEY,                       XK_i,                      spawn,          SHCMD("sysnotify") },
   { MODKEY,                       XK_n,                      spawn,          SHCMD("dunsttoggle") },
   { MODKEY,                       XK_c,                      spawn,          SHCMD("~/.config/dmenuquick/dmenuquick") },
   { 0,                            XK_Print,                  spawn,          SHCMD("screenshot") },
@@ -122,8 +125,6 @@ static Key keys[] = {
   { MODKEY,                       XK_b,                      togglebar,      {0} },
   { MODKEY,                       XK_j,                      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,                      focusstack,     {.i = -1 } },
-  { MODKEY,                       XK_i,                      incnmaster,     {.i = +1 } },
-  { MODKEY,                       XK_d,                      incnmaster,     {.i = -1 } },
   { MODKEY,                       XK_h,                      setmfact,       {.f = -0.05} },
   { MODKEY,                       XK_l,                      setmfact,       {.f = +0.05} },
   { MODKEY,                       XK_z,                      zoom,           {0} },
@@ -131,6 +132,8 @@ static Key keys[] = {
   { MODKEY,                       XK_q,                      killclient,     {0} },
   { MODKEY,                       XK_f,                      togglefullscr,  {0}  },
   { MODKEY,                       XK_space,                  togglefloating, {0} },
+  { MODKEY|ShiftMask,             XK_i,                      incnmaster,     {.i = +1 } },
+  { MODKEY|ShiftMask,             XK_d,                      incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,                      moveresize,     {.v = "0x 25y 0w 0h" } },
  	{ MODKEY|ShiftMask,             XK_k,                      moveresize,     {.v = "0x -25y 0w 0h" } },
  	{ MODKEY|ShiftMask,             XK_l,                      moveresize,     {.v = "25x 0y 0w 0h" } },
