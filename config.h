@@ -13,7 +13,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
   "CascadiaCode:pixelsize=15:antialias=true:autohint=true",
-  "NotoCJK:pixelsize=15:antialias=true:autohint=true",
+  "NotoSansCJKHK:pixelsize=15:antialias=true:autohint=true",
   "JoyPixels:pixelsize=13:antialias=true:autohint=true",
   "Symbola:pixelsize=13:antialias=true:autohint=true",
   "Symbols Nerd Font:pixelsize=14:antialias=true:autohint=true"
@@ -48,21 +48,23 @@ static const Rule rules[] = {
    *	WM_CLASS(STRING) = instance, class
    *	WM_NAME(STRING) = title
    */
-  /* class         instance         title                  tags mask     isfloating  isterminal  noswallow   monitor */
-	{ "st-256color", "st-256color",   NULL,                  0,            0,          1,          -1,         -1 },
-  { "st-256color", "st-256color",   "nnn",                 0,            1,          1,          -1,         -1 },
-  { "st-256color", "st-256color",   "mocp",                0,            1,          1,          -1,         -1 },
-  { "st-256color", "st-256color",   "pulsemixer",          0,            1,          1,          -1,         -1 },
-  { "Thunar",      NULL,            NULL,                  0,            1,          0,          0,          -1 },
-  { "discord",     NULL,            NULL,                  0,            1,          0,          0,          -1 },
-  { NULL,          NULL,            "Picture in picture",  0,            1,          0,          1,          -1 },
- 	{ NULL,          NULL,            "Event Tester",        0,            0,          0,          1,          -1 }, /* xev */
+  /* class                instance               title                  tags mask     isfloating  isterminal  noswallow   monitor */
+	{ "st-256color",        "st-256color",         NULL,                  0,            0,          1,          -1,         -1 },
+  { "st-256color",        "st-256color",         "nnn",                 0,            1,          1,          -1,         -1 },
+  { "st-256color",        "st-256color",         "mocp",                0,            1,          1,          -1,         -1 },
+  { "st-256color",        "st-256color",         "pulsemixer",          0,            1,          1,          -1,         -1 },
+  { "Thunar",             NULL,                  NULL,                  0,            1,          0,          0,          -1 },
+  { "Steam",              "Steam",               NULL,                  0,            1,          0,          0,          -1 },
+  { "discord",            NULL,                  NULL,                  0,            1,          0,          0,          -1 },
+  { "VirtualBox Manager", "VirtualBox Manager",  NULL,                  0,            1,          0,          0,          -1 },
+  { NULL,                 NULL,                  "Picture in picture",  0,            1,          0,          1,          -1 },
+ 	{ NULL,                 NULL,                  "Event Tester",        0,            0,          0,          1,          -1 }, /* xev */
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
   /* first entry is default */
@@ -100,7 +102,7 @@ static Key keys[] = {
   // Open
   { MODKEY,                       XK_w,                      spawn,          SHCMD("$BROWSER") },
   { MODKEY,                       XK_Return,                 spawn,          SHCMD("st -e nnn -edH ~") },
-  { MODKEY,                       XK_m,                      spawn,          SHCMD("st -e mocp -M ~/.config/moc") },
+  { MODKEY|ControlMask,           XK_m,                      spawn,          SHCMD("st -e mocp -M ~/.config/moc") },
   { MODKEY,                       XK_v,                      spawn,          SHCMD("st -e pulsemixer") },
   // moc
   { MODKEY,                       XK_p,                      spawn,          SHCMD("mocp -M ~/.config/moc --toggle-pause && refstatus") },
@@ -109,20 +111,26 @@ static Key keys[] = {
 
   // Script
   { MODKEY,                       XK_e,                      spawn,          SHCMD("emoji") },
-  { MODKEY,                       XK_i,                      spawn,          SHCMD("sysnotify") },
   { MODKEY,                       XK_n,                      spawn,          SHCMD("dunsttoggle") },
   { MODKEY,                       XK_c,                      spawn,          SHCMD("~/.config/dmenuquick/dmenuquick") },
+  { MODKEY,                       XK_s,                      spawn,          SHCMD("dmenussh") },
+  { MODKEY,                       XK_i,                      spawn,          SHCMD("dmenuwifi") },
+  { 0,                            XK_Menu,                   spawn,          SHCMD("sysnotify") },
   { 0,                            XK_Print,                  spawn,          SHCMD("screenshot") },
+  { MODKEY,                       XK_Right,                  spawn,          SHCMD("bc up") },
+  { MODKEY,                       XK_Left,                   spawn,          SHCMD("bc down") },
+  { MODKEY,                       XK_Up,                     spawn,          SHCMD("ac up") },
+  { MODKEY,                       XK_Down,                   spawn,          SHCMD("ac down") },
 
   //XF86 keys
   { 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD("bc up") },
   { 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("bc down") },
   { 0,                            XF86XK_AudioMute,          spawn,          SHCMD("ac toggle") },
-  { 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD("ac up") },
-  { 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("ac down") },
+  { 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD("ac up >/dev/null") },
+  { 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("ac down >/dev/null") },
 
   // Window Control
-  { MODKEY,                       XK_b,                      togglebar,      {0} },
+  { MODKEY|ShiftMask,             XK_b,                      togglebar,      {0} },
   { MODKEY,                       XK_j,                      focusstack,     {.i = +1 } },
   { MODKEY,                       XK_k,                      focusstack,     {.i = -1 } },
   { MODKEY,                       XK_h,                      setmfact,       {.f = -0.05} },
@@ -179,7 +187,7 @@ static Key keys[] = {
   TAGKEYS(                        XK_9,                                      8)
 
   // Quit
-  { MODKEY,                       XK_F12,                    quit,           {0} },
+  { MODKEY|ShiftMask,             XK_F12,                    quit,           {0} },
   { MODKEY|ShiftMask,             XK_q,                      spawn,          SHCMD("power") },
 };
 
