@@ -41,7 +41,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "🐧","🗂","🌏","📝","💬","📬","🎧","🖼","🚫" };
+static const char *tags[] = { "🐧","🗂","🌏","📝","💬","📬","🎮","🖼","🚫" };
 
 static const Rule rules[] = {
   /* xprop(1):
@@ -54,8 +54,9 @@ static const Rule rules[] = {
   { "st-256color",        "st-256color",         "mocp",                0,            1,          1,          -1,         -1 },
   { "st-256color",        "st-256color",         "pulsemixer",          0,            1,          1,          -1,         -1 },
   { "Thunar",             NULL,                  NULL,                  0,            1,          0,          0,          -1 },
-  { "Steam",              "Steam",               NULL,                  0,            1,          0,          0,          -1 },
-  { "discord",            NULL,                  NULL,                  0,            1,          0,          0,          -1 },
+  { "Steam",              "Steam",               NULL,                  1 << 6,       1,          0,          0,          -1 },
+  { "discord",            NULL,                  NULL,                  1 << 4 ,      1,          0,          0,          -1 },
+  { "Gimp",               NULL,                  NULL,                  1 << 7 ,      0,          0,          0,          -1 },
   { "VirtualBox Manager", "VirtualBox Manager",  NULL,                  0,            1,          0,          0,          -1 },
   { NULL,                 NULL,                  "Picture in picture",  0,            1,          0,          1,          -1 },
  	{ NULL,                 NULL,                  "Event Tester",        0,            0,          0,          1,          -1 }, /* xev */
@@ -115,8 +116,12 @@ static Key keys[] = {
   { MODKEY,                       XK_c,                      spawn,          SHCMD("~/.config/dmenuquick/dmenuquick") },
   { MODKEY,                       XK_s,                      spawn,          SHCMD("dmenussh") },
   { MODKEY,                       XK_i,                      spawn,          SHCMD("dmenuwifi") },
+  { MODKEY,                       XK_d,                      spawn,          SHCMD("dmenudisplay") },
+  { MODKEY,                       XK_m,                      spawn,          SHCMD("dmenumount mount") },
+  { MODKEY,                       XK_u,                      spawn,          SHCMD("dmenumount umount") },
   { 0,                            XK_Menu,                   spawn,          SHCMD("sysnotify") },
-  { 0,                            XK_Print,                  spawn,          SHCMD("screenshot") },
+  { 0,                            XK_Print,                  spawn,          SHCMD("screenshot full") },
+  { ShiftMask,                    XK_Print,                  spawn,          SHCMD("screenshot select") },
   { MODKEY,                       XK_Right,                  spawn,          SHCMD("bc up") },
   { MODKEY,                       XK_Left,                   spawn,          SHCMD("bc down") },
   { MODKEY,                       XK_Up,                     spawn,          SHCMD("ac up") },
