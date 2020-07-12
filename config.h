@@ -48,18 +48,19 @@ static const Rule rules[] = {
    *	WM_CLASS(STRING) = instance, class
    *	WM_NAME(STRING) = title
    */
-  /* class                instance               title                  tags mask     isfloating  isterminal  noswallow   monitor */
-	{ "st-256color",        "st-256color",         NULL,                  0,            0,          1,          -1,         -1 },
-  { "st-256color",        "st-256color",         "nnn",                 0,            1,          1,          -1,         -1 },
-  { "st-256color",        "st-256color",         "mocp",                0,            1,          1,          -1,         -1 },
-  { "st-256color",        "st-256color",         "pulsemixer",          0,            1,          1,          -1,         -1 },
-  { "Thunar",             NULL,                  NULL,                  0,            1,          0,          0,          -1 },
-  { "Steam",              "Steam",               NULL,                  1 << 6,       1,          0,          0,          -1 },
-  { "discord",            NULL,                  NULL,                  1 << 4 ,      1,          0,          0,          -1 },
-  { "Gimp",               NULL,                  NULL,                  1 << 7 ,      0,          0,          0,          -1 },
-  { "VirtualBox Manager", "VirtualBox Manager",  NULL,                  0,            1,          0,          0,          -1 },
-  { NULL,                 NULL,                  "Picture in picture",  0,            1,          0,          1,          -1 },
- 	{ NULL,                 NULL,                  "Event Tester",        0,            0,          0,          1,          -1 }, /* xev */
+  /* class                instance               title                  tags mask  switchtotag  isfloating  isterminal  noswallow  monitor */
+	{ "st-256color",        "st-256color",         NULL,                  0,         0,           0,          1,          -1,        -1 },
+  { "st-256color",        "st-256color",         "nnn",                 1 << 1,    1,           1,          1,          -1,        -1 },
+  { "st-256color",        "st-256color",         "mocp",                0,         0,           1,          1,          -1,        -1 },
+  { "st-256color",        "st-256color",         "pulsemixer",          0,         0,           1,          1,          -1,        -1 },
+  { "Thunar",             NULL,                  NULL,                  1 << 1,    1,           1,          0,          0,         -1 },
+  { "Steam",              "Steam",               NULL,                  1 << 6,    1,           1,          0,          0,         -1 },
+  { "discord",            NULL,                  NULL,                  1 << 4,    1,           1,          0,          0,         -1 },
+  { "Gimp",               NULL,                  NULL,                  1 << 7,    1,           0,          0,          0,         -1 },
+  { "Zathura",            NULL,                  NULL,                  1 << 3,    1,           0,          0,          0,         -1 },
+  { "VirtualBox Manager", "VirtualBox Manager",  NULL,                  0,         0,           1,          0,          0,         -1 },
+  { NULL,                 NULL,                  "Picture in picture",  0,         0,           1,          0,          1,         -1 },
+ 	{ NULL,                 NULL,                  "Event Tester",        0,         0,           0,          0,          1,         -1 },
 };
 
 /* layout(s) */
@@ -67,15 +68,19 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
+#include "fibonacci.c"
+
 static const Layout layouts[] = {
   /* first entry is default */
   /* symbol     arrange function */
-  { "[]=",      tile },
+  { "[\\]",     dwindle },
   { "><>",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
   { "|M|",      centeredmaster },
   { ">M>",      centeredfloatingmaster },
-  { "HHH",      grid }
+  { "HHH",      grid },
+  { "(@)",      spiral  },
+  { "[]=",      tile }
 };
 
 /* key definitions */
@@ -166,12 +171,14 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_c,                      moveplace,      {.ui = WIN_SE }},
 
   // Layout
-  { MODKEY|ShiftMask,             XK_t,                      setlayout,      {.v = &layouts[0]} },
+  { MODKEY|ShiftMask,             XK_r,                      setlayout,      {.v = &layouts[0]} },
   { MODKEY|ShiftMask,             XK_f,                      setlayout,      {.v = &layouts[1]} },
   { MODKEY|ShiftMask,             XK_m,                      setlayout,      {.v = &layouts[2]} },
   { MODKEY|ShiftMask,             XK_c,                      setlayout,      {.v = &layouts[3]} },
   { MODKEY|ShiftMask,             XK_o,                      setlayout,      {.v = &layouts[4]} },
   { MODKEY|ShiftMask,             XK_g,                      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY|ShiftMask,             XK_s,                      setlayout,      {.v = &layouts[6]} },
+	{ MODKEY|ShiftMask,             XK_t,                      setlayout,      {.v = &layouts[7]} },
   { MODKEY|ShiftMask,             XK_space,                  setlayout,      {0} },
 
   // Tag Control
