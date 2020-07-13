@@ -3,7 +3,6 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 6;        /* horiz inner gap between windows */
 static const unsigned int gappiv    = 6;        /* vert inner gap between windows */
 static const unsigned int gappoh    = 6;        /* horiz outer gap between windows and screen edge */
@@ -48,19 +47,24 @@ static const Rule rules[] = {
    *	WM_CLASS(STRING) = instance, class
    *	WM_NAME(STRING) = title
    */
-  /* class                instance               title                  tags mask  switchtotag  isfloating  isterminal  noswallow  monitor */
-	{ "st-256color",        "st-256color",         NULL,                  0,         0,           0,          1,          -1,        -1 },
-  { "st-256color",        "st-256color",         "nnn",                 1 << 1,    1,           1,          1,          -1,        -1 },
-  { "st-256color",        "st-256color",         "mocp",                0,         0,           1,          1,          -1,        -1 },
-  { "st-256color",        "st-256color",         "pulsemixer",          0,         0,           1,          1,          -1,        -1 },
-  { "Thunar",             NULL,                  NULL,                  1 << 1,    1,           1,          0,          0,         -1 },
-  { "Steam",              "Steam",               NULL,                  1 << 6,    1,           1,          0,          0,         -1 },
-  { "discord",            NULL,                  NULL,                  1 << 4,    1,           1,          0,          0,         -1 },
-  { "Gimp",               NULL,                  NULL,                  1 << 7,    1,           0,          0,          0,         -1 },
-  { "Zathura",            NULL,                  NULL,                  1 << 3,    1,           0,          0,          0,         -1 },
-  { "VirtualBox Manager", "VirtualBox Manager",  NULL,                  0,         0,           1,          0,          0,         -1 },
-  { NULL,                 NULL,                  "Picture in picture",  0,         0,           1,          0,          1,         -1 },
- 	{ NULL,                 NULL,                  "Event Tester",        0,         0,           0,          0,          1,         -1 },
+  /* class                instance                 title                  tags mask  switchtotag  isfloating  monitor */
+	{ "st-256color",        "st-256color",           NULL,                  0,         0,           0,          -1 },
+  { "st-256color",        "st-256color",           "mocp",                0,         0,           1,          -1 },
+  { "st-256color",        "st-256color",           "pulsemixer",          0,         0,           1,          -1 },
+  { "st-256color",        "st-256color",           "nnn",                 1 << 1,    1,           1,          -1 },
+  { "Thunar",             NULL,                    NULL,                  1 << 1,    1,           1,          -1 },
+  { "Brave-browser",      "brave-browser",         NULL,                  1 << 2,    1,           0,          -1 },
+  { "Zathura",            NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
+  { NULL,                 "libreoffice",           NULL,                  1 << 3,    1,           0,          -1 },
+  { "discord",            NULL,                    "Discord",             1 << 4,    1,           1,          -1 },
+  { "Brave-browser",      "mail.google.com__mail", NULL,                  1 << 5,    1,           0,          -1 },
+  { "Steam",              "Steam",                 NULL,                  1 << 6,    1,           1,          -1 },
+  { "mpv",                NULL,                    NULL,                  1 << 7,    1,           0,          -1 },
+  { "Sxiv",               NULL,                    NULL,                  1 << 7,    1,           0,          -1 },
+  { "Gimp",               NULL,                    NULL,                  1 << 7,    1,           0,          -1 },
+  { "VirtualBox Manager", "VirtualBox Manager",    NULL,                  0,         0,           1,          -1 },
+  { NULL,                 NULL,                    "Picture in picture",  0,         0,           1,          -1 },
+ 	{ NULL,                 NULL,                    "Event Tester",        0,         0,           0,          -1 },
 };
 
 /* layout(s) */
