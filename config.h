@@ -1,12 +1,12 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 6;        /* horiz inner gap between windows */
-static const unsigned int gappiv    = 6;        /* vert inner gap between windows */
-static const unsigned int gappoh    = 6;        /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 6;        /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 3;        /* horiz inner gap between windows */
+static const unsigned int gappiv    = 3;        /* vert inner gap between windows */
+static const unsigned int gappoh    = 3;        /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 3;        /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -40,35 +40,50 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "🐧","🗂","🌏","📝","💬","📬","🎮","🖼","🚫" };
+static const char *tags[] = { "🐧","🌏","🖼","📽","📝","💬","📬","🎮","🚫" };
 
 static const Rule rules[] = {
   /* xprop(1):
    *	WM_CLASS(STRING) = instance, class
    *	WM_NAME(STRING) = title
    */
-  /* class                instance                 title                  tags mask  switchtotag  isfloating  monitor */
-	{ "st-256color",        "st-256color",           NULL,                  0,         0,           0,          -1 },
-  { "st-256color",        "st-256color",           "mocp",                0,         0,           1,          -1 },
-  { "st-256color",        "st-256color",           "pulsemixer",          0,         0,           1,          -1 },
-  { "st-256color",        "st-256color",           "nnn",                 1 << 1,    1,           1,          -1 },
-  { "Thunar",             NULL,                    NULL,                  1 << 1,    1,           1,          -1 },
-  { "Brave-browser",      "brave-browser",         NULL,                  1 << 2,    1,           0,          -1 },
-  { "Zathura",            NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
-  { NULL,                 "libreoffice",           NULL,                  1 << 3,    1,           0,          -1 },
-  { "discord",            NULL,                    "Discord",             1 << 4,    1,           1,          -1 },
-  { "Brave-browser",      "mail.google.com__mail", NULL,                  1 << 5,    1,           0,          -1 },
-  { "Steam",              "Steam",                 NULL,                  1 << 6,    1,           1,          -1 },
-  { "mpv",                NULL,                    NULL,                  1 << 7,    1,           0,          -1 },
-  { "Sxiv",               NULL,                    NULL,                  1 << 7,    1,           0,          -1 },
-  { "Gimp",               NULL,                    NULL,                  1 << 7,    1,           0,          -1 },
-  { "VirtualBox Manager", "VirtualBox Manager",    NULL,                  0,         0,           1,          -1 },
-  { NULL,                 NULL,                    "Picture in picture",  0,         0,           1,          -1 },
- 	{ NULL,                 NULL,                    "Event Tester",        0,         0,           0,          -1 },
+  /* class                     instance                 title                  tags mask  switchtotag  isfloating  monitor */
+  { NULL,                      NULL,                    "Picture in picture",  0,         0,           1,          -1 },
+	{ "st-256color",             "st-256color",           NULL,                  0,         0,           0,          -1 },
+  { "st-256color",             "st-256color",           "mocp",                0,         0,           1,          -1 },
+  { "st-256color",             "st-256color",           "pulsemixer",          0,         0,           1,          -1 },
+  { "st-256color",             "st-256color",           "bluetoothctl",        0,         0,           1,          -1 },
+  { "st-256color",             "st-256color",           "nnn",                 0,         0,           1,          -1 },
+  { "Pulseeffects",            "pulseeffects",          NULL,                  0,         0,           1,          -1 },
+  { "stacer",                  NULL,                    NULL,                  0,         0,           1,          -1 },
+ 	{ "Anamnesis",               NULL,                    NULL,                  0,         0,           1,          -1 },
+  { "Galculator",              NULL,                    NULL,                  0,         0,           1,          -1 },
+  { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           1,          -1 },
+  { "Thunar",                  NULL,                    NULL,                  1,         1,           1,          -1 },
+  { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           0,          -1 },
+  { "Sxiv",                    NULL,                    NULL,                  1 << 2,    1,           0,          -1 },
+  { "Gimp",                    NULL,                    NULL,                  1 << 2,    1,           0,          -1 },
+  { "Inkscape",                NULL,                    NULL,                  1 << 2,    1,           0,          -1 },
+  { "mpv",                     NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
+  { "obs",                     NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
+  { "openshot",                NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
+  { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
+  { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
+  { "libreoffice-writer",      NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
+  { NULL,                      NULL,                    "Discord",             1 << 5,    1,           0,          -1 },
+  { "TelegramDesktop",         NULL,                    NULL,                  1 << 5,    1,           1,          -1 },
+  { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 5,    1,           0,          -1 },
+  { "Brave-browser",           "nmg.kissflow.com__view_home_stream", NULL,     1 << 5,    1,           0,          -1 },
+  { "Thunderbird",             "Mail",                  NULL,                  1 << 6,    1,           0,          -1 },
+  { "Thunderbird",             "Calendar",              NULL,                  0,         0,           1,          -1 },
+  { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           1,          -1 },
+  { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 6,    1,           0,          -1 },
+  { "Steam",                   "Steam",                 NULL,                  1 << 7,    1,           1,          -1 },
+  { "minecraft-launcher",      NULL,                    NULL,                  1 << 7,    1,           1,          -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -78,8 +93,8 @@ static const Layout layouts[] = {
   /* first entry is default */
   /* symbol     arrange function */
   { "[\\]",     dwindle },
-  { "><>",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
+  { "><>",      NULL },    /* no layout function means floating behavior */
   { "|M|",      centeredmaster },
   { ">M>",      centeredfloatingmaster },
   { "HHH",      grid },
@@ -89,6 +104,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define AltMask Mod1Mask
 #define TAGKEYS(KEY,TAG) \
   { MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
   { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -114,7 +130,8 @@ static Key keys[] = {
   { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -edH ~") },
   { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
   { MODKEY,                       XK_v,                      spawn,            SHCMD("st -e pulsemixer") },
-  // moc
+  { ControlMask,                  XK_Menu,                   spawn,            SHCMD("anamnesis --browser") },
+  { 0,                            XK_Pause,                  spawn,            SHCMD("slock") },
   { MODKEY,                       XK_p,                      spawn,            SHCMD("mocp -M ~/.config/moc --toggle-pause && refstatus") },
   { MODKEY,                       XK_bracketleft,            spawn,            SHCMD("mocp -M ~/.config/moc --previous") },
   { MODKEY,                       XK_bracketright,           spawn,            SHCMD("mocp -M ~/.config/moc --next") },
@@ -128,6 +145,7 @@ static Key keys[] = {
   { MODKEY,                       XK_d,                      spawn,            SHCMD("dmenudisplay") },
   { MODKEY,                       XK_m,                      spawn,            SHCMD("dmenumount mount") },
   { MODKEY,                       XK_u,                      spawn,            SHCMD("dmenumount umount") },
+  { MODKEY,                       XK_b,                      spawn,            SHCMD("dmenublue >/dev/null") },
   { 0,                            XK_Menu,                   spawn,            SHCMD("sysnotify") },
   { 0,                            XK_Print,                  spawn,            SHCMD("screenshot full") },
   { ShiftMask,                    XK_Print,                  spawn,            SHCMD("screenshot select") },
@@ -151,8 +169,8 @@ static Key keys[] = {
   { MODKEY,                       XK_l,                      setmfact,         {.f = +0.05} },
   { MODKEY,                       XK_z,                      zoom,             {0} },
   { MODKEY,                       XK_Tab,                    view,             {0} },
-  { Mod4Mask,                     XK_Tab,                    shiftviewclients, { .i = +1 } },
-  { Mod4Mask|ShiftMask,           XK_Tab,                    shiftviewclients, { .i = -1 } },
+  { AltMask,                      XK_Tab,                    shiftviewclients, { .i = +1 } },
+  { AltMask|ShiftMask,            XK_Tab,                    shiftviewclients, { .i = -1 } },
   { MODKEY,                       XK_q,                      killclient,       {0} },
   { MODKEY,                       XK_f,                      togglefullscr,    {0}  },
   { MODKEY,                       XK_space,                  togglefloating,   {0} },
