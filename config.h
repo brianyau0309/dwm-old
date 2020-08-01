@@ -7,17 +7,17 @@ static const unsigned int gappih    = 3;        /* horiz inner gap between windo
 static const unsigned int gappiv    = 3;        /* vert inner gap between windows */
 static const unsigned int gappoh    = 3;        /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 3;        /* vert outer gap between windows and screen edge */
-static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static const int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
-  "CascadiaCode:pixelsize=15:antialias=true:autohint=true",
-  "NotoSansCJKHK:pixelsize=15:antialias=true:autohint=true",
-  "JoyPixels:pixelsize=13:antialias=true:autohint=true",
-  "Symbola:pixelsize=13:antialias=true:autohint=true",
-  "Symbols Nerd Font:pixelsize=14:antialias=true:autohint=true"
+  "CascadiaCode:pixelsize=14:antialias=true:autohint=true",
+  "NotoSansCJKHK:pixelsize=14:antialias=true:autohint=true",
+  "JoyPixels:pixelsize=12.5:antialias=true:autohint=true",
+  "Symbola:pixelsize=12.5:antialias=true:autohint=true",
+  "Symbols Nerd Font:pixelsize=13:antialias=true:autohint=true"
 };
-static const char dmenufont[]       = "CascadiaCode:pixelsize=15:antialias=true:autohint=true";
+static const char dmenufont[]       = "CascadiaCode:pixelsize=14:antialias=true:autohint=true";
 static const char col_gray1[]       = "#202020";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -56,7 +56,6 @@ static const Rule rules[] = {
   { "st-256color",             "st-256color",           "nnn",                 0,         0,           1,          -1 },
   { "Pulseeffects",            "pulseeffects",          NULL,                  0,         0,           1,          -1 },
   { "stacer",                  NULL,                    NULL,                  0,         0,           1,          -1 },
- 	{ "Anamnesis",               NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Galculator",              NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           1,          -1 },
   { "Thunar",                  NULL,                    NULL,                  1,         1,           1,          -1 },
@@ -69,21 +68,22 @@ static const Rule rules[] = {
   { "openshot",                NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
   { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
   { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
-  { "libreoffice-writer",      NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
   { NULL,                      NULL,                    "Discord",             1 << 5,    1,           0,          -1 },
-  { "TelegramDesktop",         NULL,                    NULL,                  1 << 5,    1,           1,          -1 },
+  { "TelegramDesktop",         NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
   { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 5,    1,           0,          -1 },
-  { "Brave-browser",           "nmg.kissflow.com__view_home_stream", NULL,     1 << 5,    1,           0,          -1 },
+  { "Brave-browser",           "nmg.kissflow.com",      NULL,                  1 << 5,    1,           0,          -1 },
+  { "Brave-browser",           "app.clickup.com",       NULL,                  1 << 5,    1,           0,          -1 },
+  { "Brave-browser",           "web.telegram.org",      NULL,                  1 << 5,    1,           0,          -1 },
+  { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 6,    1,           0,          -1 },
   { "Thunderbird",             "Mail",                  NULL,                  1 << 6,    1,           0,          -1 },
   { "Thunderbird",             "Calendar",              NULL,                  0,         0,           1,          -1 },
   { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           1,          -1 },
-  { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 6,    1,           0,          -1 },
   { "Steam",                   "Steam",                 NULL,                  1 << 7,    1,           1,          -1 },
   { "minecraft-launcher",      NULL,                    NULL,                  1 << 7,    1,           1,          -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -130,7 +130,7 @@ static Key keys[] = {
   { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -edH ~") },
   { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
   { MODKEY,                       XK_v,                      spawn,            SHCMD("st -e pulsemixer") },
-  { ControlMask,                  XK_Menu,                   spawn,            SHCMD("anamnesis --browser") },
+  { ControlMask,                  XK_Menu,                   spawn,            SHCMD("clipmenu 2>/dev/null") },
   { 0,                            XK_Pause,                  spawn,            SHCMD("slock") },
   { MODKEY,                       XK_p,                      spawn,            SHCMD("mocp -M ~/.config/moc --toggle-pause && refstatus") },
   { MODKEY,                       XK_bracketleft,            spawn,            SHCMD("mocp -M ~/.config/moc --previous") },
@@ -151,15 +151,15 @@ static Key keys[] = {
   { ShiftMask,                    XK_Print,                  spawn,            SHCMD("screenshot select") },
   { MODKEY,                       XK_Right,                  spawn,            SHCMD("bc up") },
   { MODKEY,                       XK_Left,                   spawn,            SHCMD("bc down") },
-  { MODKEY,                       XK_Up,                     spawn,            SHCMD("ac up") },
-  { MODKEY,                       XK_Down,                   spawn,            SHCMD("ac down") },
+  { MODKEY,                       XK_Up,                     spawn,            SHCMD("audio up") },
+  { MODKEY,                       XK_Down,                   spawn,            SHCMD("audio down") },
 
   //XF86 keys
-  { 0,                            XF86XK_MonBrightnessUp,    spawn,            SHCMD("bc up") },
-  { 0,                            XF86XK_MonBrightnessDown,  spawn,            SHCMD("bc down") },
-  { 0,                            XF86XK_AudioMute,          spawn,            SHCMD("ac toggle") },
-  { 0,                            XF86XK_AudioRaiseVolume,   spawn,            SHCMD("ac up >/dev/null") },
-  { 0,                            XF86XK_AudioLowerVolume,   spawn,            SHCMD("ac down >/dev/null") },
+  { 0,                            XF86XK_MonBrightnessUp,    spawn,            SHCMD("brightness up") },
+  { 0,                            XF86XK_MonBrightnessDown,  spawn,            SHCMD("brightness down") },
+  { 0,                            XF86XK_AudioMute,          spawn,            SHCMD("audio toggle") },
+  { 0,                            XF86XK_AudioRaiseVolume,   spawn,            SHCMD("audio up >/dev/null") },
+  { 0,                            XF86XK_AudioLowerVolume,   spawn,            SHCMD("audio down >/dev/null") },
 
   // Window Control
   { MODKEY|ShiftMask,             XK_b,                      togglebar,        {0} },
@@ -170,7 +170,8 @@ static Key keys[] = {
   { MODKEY,                       XK_z,                      zoom,             {0} },
   { MODKEY,                       XK_Tab,                    view,             {0} },
   { AltMask,                      XK_Tab,                    shiftviewclients, { .i = +1 } },
-  { AltMask|ShiftMask,            XK_Tab,                    shiftviewclients, { .i = -1 } },
+  { AltMask,                      XK_l,                      shiftviewclients, { .i = +1 } },
+  { AltMask,                      XK_h,                      shiftviewclients, { .i = -1 } },
   { MODKEY,                       XK_q,                      killclient,       {0} },
   { MODKEY,                       XK_f,                      togglefullscr,    {0}  },
   { MODKEY,                       XK_space,                  togglefloating,   {0} },
@@ -196,8 +197,8 @@ static Key keys[] = {
 
   // Layout
   { MODKEY|ShiftMask,             XK_r,                      setlayout,        {.v = &layouts[0]} },
-  { MODKEY|ShiftMask,             XK_f,                      setlayout,        {.v = &layouts[1]} },
-  { MODKEY|ShiftMask,             XK_m,                      setlayout,        {.v = &layouts[2]} },
+  { MODKEY|ShiftMask,             XK_m,                      setlayout,        {.v = &layouts[1]} },
+  { MODKEY|ShiftMask,             XK_f,                      setlayout,        {.v = &layouts[2]} },
   { MODKEY|ShiftMask,             XK_c,                      setlayout,        {.v = &layouts[3]} },
   { MODKEY|ShiftMask,             XK_o,                      setlayout,        {.v = &layouts[4]} },
   { MODKEY|ShiftMask,             XK_g,                      setlayout,        {.v = &layouts[5]} },
