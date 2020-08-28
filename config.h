@@ -13,8 +13,8 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
   "CascadiaCode:pixelsize=14:antialias=true:autohint=true",
   "NotoSansCJKHK:pixelsize=14:antialias=true:autohint=true",
-  "JoyPixels:pixelsize=12.5:antialias=true:autohint=true",
-  "Symbola:pixelsize=12.5:antialias=true:autohint=true",
+  "JoyPixels:pixelsize=12:antialias=true:autohint=true",
+  "Symbola:pixelsize=12:antialias=true:autohint=true",
   "Symbols Nerd Font:pixelsize=13:antialias=true:autohint=true"
 };
 static const char dmenufont[]       = "CascadiaCode:pixelsize=14:antialias=true:autohint=true";
@@ -40,7 +40,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "🐧","🌏","🖼","📽","📝","💬","📬","🎮","🚫" };
+static const char *tags[] = { "🐧","🌏","📬","💬","📝","🖼","📽","🎮","🚫" };
 
 static const Rule rules[] = {
   /* xprop(1):
@@ -60,24 +60,24 @@ static const Rule rules[] = {
   { "Thunar",                  NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           1,          -1 },
   { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           0,          -1 },
-  { "Sxiv",                    NULL,                    NULL,                  1 << 2,    1,           0,          -1 },
-  { "Gimp",                    NULL,                    NULL,                  1 << 2,    1,           0,          -1 },
-  { "Inkscape",                NULL,                    NULL,                  1 << 2,    1,           0,          -1 },
-  { "mpv",                     NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
-  { "obs",                     NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
-  { "openshot",                NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
-  { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
-  { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
-  { NULL,                      NULL,                    "Discord",             1 << 5,    1,           0,          -1 },
-  { "TelegramDesktop",         NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
-  { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 5,    1,           0,          -1 },
-  { "Brave-browser",           "nmg.kissflow.com",      NULL,                  1 << 5,    1,           0,          -1 },
-  { "Brave-browser",           "app.clickup.com",       NULL,                  1 << 5,    1,           0,          -1 },
-  { "Brave-browser",           "web.telegram.org",      NULL,                  1 << 5,    1,           0,          -1 },
-  { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 6,    1,           0,          -1 },
-  { "Thunderbird",             "Mail",                  NULL,                  1 << 6,    1,           0,          -1 },
+  { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 2,    1,           0,          -1 },
+  { "Thunderbird",             "Mail",                  NULL,                  1 << 2,    0,           0,          -1 },
   { "Thunderbird",             "Calendar",              NULL,                  0,         0,           1,          -1 },
   { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           1,          -1 },
+  { NULL,                      NULL,                    "Discord",             1 << 3,    1,           0,          -1 },
+  { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
+  { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 3,    1,           0,          -1 },
+  { "Brave-browser",           "nmg.kissflow.com",      NULL,                  1 << 3,    1,           0,          -1 },
+  { "Brave-browser",           "app.clickup.com",       NULL,                  1 << 3,    1,           0,          -1 },
+  { "Brave-browser",           "web.telegram.org",      NULL,                  1 << 3,    1,           0,          -1 },
+  { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
+  { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
+  { "Sxiv",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
+  { "Gimp",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
+  { "Inkscape",                NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
+  { "mpv",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
+  { "obs",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
+  { "openshot",                NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
   { "Steam",                   "Steam",                 NULL,                  1 << 7,    1,           1,          -1 },
   { "minecraft-launcher",      NULL,                    NULL,                  1 << 7,    1,           1,          -1 },
 };
@@ -138,6 +138,7 @@ static Key keys[] = {
 
   // Script
   { MODKEY,                       XK_e,                      spawn,            SHCMD("emoji") },
+  { MODKEY,                       XK_r,                      spawn,            SHCMD("refstatus") },
   { MODKEY,                       XK_n,                      spawn,            SHCMD("dunsttoggle") },
   { MODKEY,                       XK_c,                      spawn,            SHCMD("~/.config/dmenuquick/dmenuquick") },
   { MODKEY,                       XK_s,                      spawn,            SHCMD("dmenussh") },
@@ -149,17 +150,17 @@ static Key keys[] = {
   { 0,                            XK_Menu,                   spawn,            SHCMD("sysnotify") },
   { 0,                            XK_Print,                  spawn,            SHCMD("screenshot full") },
   { ShiftMask,                    XK_Print,                  spawn,            SHCMD("screenshot select") },
-  { MODKEY,                       XK_Right,                  spawn,            SHCMD("brightness up") },
-  { MODKEY,                       XK_Left,                   spawn,            SHCMD("brightness down") },
-  { MODKEY,                       XK_Up,                     spawn,            SHCMD("audio up") },
-  { MODKEY,                       XK_Down,                   spawn,            SHCMD("audio down") },
+  { MODKEY,                       XK_Right,                  spawn,            SHCMD("brightness up && xobctl show brightness") },
+  { MODKEY,                       XK_Left,                   spawn,            SHCMD("brightness down && xobctl show brightness") },
+  { MODKEY,                       XK_Up,                     spawn,            SHCMD("audio up && xobctl show volume") },
+  { MODKEY,                       XK_Down,                   spawn,            SHCMD("audio down && xobctl show volume") },
 
   //XF86 keys
-  { 0,                            XF86XK_MonBrightnessUp,    spawn,            SHCMD("brightness up") },
-  { 0,                            XF86XK_MonBrightnessDown,  spawn,            SHCMD("brightness down") },
-  { 0,                            XF86XK_AudioMute,          spawn,            SHCMD("audio toggle") },
-  { 0,                            XF86XK_AudioRaiseVolume,   spawn,            SHCMD("audio up >/dev/null") },
-  { 0,                            XF86XK_AudioLowerVolume,   spawn,            SHCMD("audio down >/dev/null") },
+  { 0,                            XF86XK_MonBrightnessUp,    spawn,            SHCMD("brightness up && xobctl show brightness") },
+  { 0,                            XF86XK_MonBrightnessDown,  spawn,            SHCMD("brightness down && xobctl show brightness") },
+  { 0,                            XF86XK_AudioMute,          spawn,            SHCMD("audio toggle && xobctl show volume") },
+  { 0,                            XF86XK_AudioRaiseVolume,   spawn,            SHCMD("audio up && xobctl show volume") },
+  { 0,                            XF86XK_AudioLowerVolume,   spawn,            SHCMD("audio down && xobctl show volume") },
 
   // Window Control
   { MODKEY|ShiftMask,             XK_b,                      togglebar,        {0} },
