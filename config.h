@@ -120,7 +120,17 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
-static char *statuscmds[] = { "notify-send X01 Mouse$BUTTON", "notify-send X02 Mouse$BUTTON", "notify-send X03 Mouse$BUTTON", "notify-send X04 Mouse$BUTTON", "notify-send X05 Mouse$BUTTON", "statuscmd.audio", "notify-send X07 Mouse$BUTTON", "notify-send X08 Mouse$BUTTON", "notify-send X09 Mouse$BUTTON" };
+static char *statuscmds[] = {
+  "statuscmd.moc",
+  "statuscmd.wkon",
+  "statuscmd.storage",
+  "statuscmd.battery",
+  "notify-send X05 Mouse$BUTTON",
+  "statuscmd.audio",
+  "statuscmd.bluetooth",
+  "statuscmd.notify",
+  "statuscmd.internet",
+};
 static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
 #include <X11/XF86keysym.h>
@@ -132,6 +142,7 @@ static Key keys[] = {
   // Open
   { MODKEY,                       XK_w,                      spawn,            SHCMD("$BROWSER") },
   { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -edH ~") },
+  { MODKEY,                       XK_n,                      spawn,            SHCMD("dunstctl set-paused toggle && refstatus") },
   { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
   { MODKEY,                       XK_v,                      spawn,            SHCMD("st -e pulsemixer") },
   { ControlMask,                  XK_Menu,                   spawn,            SHCMD("clipmenu 2>/dev/null") },
@@ -143,7 +154,6 @@ static Key keys[] = {
   // Script
   { MODKEY,                       XK_e,                      spawn,            SHCMD("emoji") },
   { MODKEY,                       XK_r,                      spawn,            SHCMD("refstatus") },
-  { MODKEY,                       XK_n,                      spawn,            SHCMD("dunsttoggle") },
   { MODKEY,                       XK_c,                      spawn,            SHCMD("~/.config/dmenuquick/dmenuquick") },
   { MODKEY,                       XK_s,                      spawn,            SHCMD("dmenussh") },
   { MODKEY,                       XK_i,                      spawn,            SHCMD("dmenuwifi") },
@@ -238,7 +248,9 @@ static Button buttons[] = {
   /* click                event mask      button          function        argument */
   { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
   { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-  { ClkWinTitle,          0,              Button2,        zoom,           {0} },
+  { ClkWinTitle,          0,              Button1,        zoom,           {0} },
+  { ClkWinTitle,          0,              Button3,        spawn,          {.v = termcmd } },
+  { ClkWinTitle,          0,              Button2,        spawn,          SHCMD("st -e nnn -edH ~") },
 	{ ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
