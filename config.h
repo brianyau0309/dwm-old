@@ -141,7 +141,7 @@ static Key keys[] = {
 
   // Open
   { MODKEY,                       XK_w,                      spawn,            SHCMD("$BROWSER") },
-  { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -edH ~") },
+  { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -edHrx ~") },
   { MODKEY,                       XK_n,                      spawn,            SHCMD("dunstctl set-paused toggle && refstatus") },
   { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
   { MODKEY,                       XK_v,                      spawn,            SHCMD("st -e pulsemixer") },
