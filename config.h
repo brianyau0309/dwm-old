@@ -250,7 +250,7 @@ static Button buttons[] = {
   { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
   { ClkWinTitle,          0,              Button1,        zoom,           {0} },
   { ClkWinTitle,          0,              Button3,        spawn,          {.v = termcmd } },
-  { ClkWinTitle,          0,              Button2,        spawn,          SHCMD("st -e nnn -edH ~") },
+  { ClkWinTitle,          0,              Button2,        spawn,          {.v = dmenucmd } },
 	{ ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
