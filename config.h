@@ -79,6 +79,7 @@ static const Rule rules[] = {
   { "obs",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
   { "openshot",                NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
   { "Steam",                   "Steam",                 NULL,                  1 << 7,    1,           1,          -1 },
+  { NULL,                      "Lutris",                NULL,                  1 << 7,    1,           1,          -1 },
   { "minecraft-launcher",      NULL,                    NULL,                  1 << 7,    1,           1,          -1 },
 };
 
@@ -248,6 +249,7 @@ static Button buttons[] = {
   /* click                event mask      button          function        argument */
   { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
   { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+  { ClkLtSymbol,          0,              Button2,        spawn,          SHCMD("power") },
   { ClkWinTitle,          0,              Button1,        zoom,           {0} },
   { ClkWinTitle,          0,              Button3,        spawn,          {.v = termcmd } },
   { ClkWinTitle,          0,              Button2,        spawn,          {.v = dmenucmd } },
