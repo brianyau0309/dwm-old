@@ -60,6 +60,7 @@ static const Rule rules[] = {
   { "Thunar",                  NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           1,          -1 },
   { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           0,          -1 },
+  { "Google-chrome",           "google-chrome",         NULL,                  1 << 1,    1,           0,          -1 },
   { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 2,    1,           0,          -1 },
   { "Thunderbird",             "Mail",                  NULL,                  1 << 2,    0,           0,          -1 },
   { "Thunderbird",             "Calendar",              NULL,                  0,         0,           1,          -1 },
@@ -142,6 +143,7 @@ static Key keys[] = {
 
   // Open
   { MODKEY,                       XK_w,                      spawn,            SHCMD("$BROWSER") },
+  { MODKEY|ShiftMask,             XK_w,                      spawn,            SHCMD("$WBROWSER") },
   { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -edHrx ~") },
   { MODKEY,                       XK_n,                      spawn,            SHCMD("dunstctl set-paused toggle && refstatus") },
   { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
