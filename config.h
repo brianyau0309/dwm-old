@@ -24,7 +24,7 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#006688";
 static const char col_green[]       = "#009922";
-static const unsigned int baralpha = 0xb0;
+static const unsigned int baralpha = 0x80;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
   /*                   fg         bg         border   */
@@ -58,6 +58,7 @@ static const Rule rules[] = {
   { "stacer",                  NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Galculator",              NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Thunar",                  NULL,                    NULL,                  0,         0,           1,          -1 },
+  { "Pcmanfm",                 "pcmanfm",               NULL,                  0,         0,           1,          -1 },
   { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           1,          -1 },
   { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           0,          -1 },
   { "Google-chrome",           "google-chrome",         NULL,                  1 << 1,    1,           0,          -1 },
@@ -66,7 +67,7 @@ static const Rule rules[] = {
   { "Thunderbird",             "Calendar",              NULL,                  0,         0,           1,          -1 },
   { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           1,          -1 },
   { NULL,                      NULL,                    "Discord",             1 << 3,    1,           0,          -1 },
-  { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    1,           0,          -1 },
+  { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    0,           0,          -1 },
   { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 3,    1,           0,          -1 },
   { "Brave-browser",           "nmg.kissflow.com",      NULL,                  1 << 3,    1,           0,          -1 },
   { "Brave-browser",           "app.clickup.com",       NULL,                  1 << 3,    1,           0,          -1 },
@@ -80,6 +81,7 @@ static const Rule rules[] = {
   { "obs",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
   { "openshot",                NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
   { "Steam",                   "Steam",                 NULL,                  1 << 7,    1,           1,          -1 },
+  { "parsecd",                 "parsecd",               NULL,                  1 << 7,    1,           1,          -1 },
   { NULL,                      "Lutris",                NULL,                  1 << 7,    1,           1,          -1 },
   { "minecraft-launcher",      NULL,                    NULL,                  1 << 7,    1,           1,          -1 },
 };
@@ -139,12 +141,13 @@ static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 static Key keys[] = {
   /* modifier                     key                        function          argument */
   { MODKEY,                       XK_semicolon,              spawn,            {.v = dmenucmd } },
-  { MODKEY,                       XK_t,                      spawn,            {.v = termcmd } },
+  { MODKEY|AltMask,               XK_t,                      spawn,            {.v = termcmd } },
+  { MODKEY,                       XK_t,                      spawn,            SHCMD("WKON_PATH=\"$(wkon anchor)\" st") },
 
   // Open
   { MODKEY,                       XK_w,                      spawn,            SHCMD("$BROWSER") },
   { MODKEY|ShiftMask,             XK_w,                      spawn,            SHCMD("$WBROWSER") },
-  { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -edHrx ~") },
+  { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -erx ~") },
   { MODKEY,                       XK_n,                      spawn,            SHCMD("dunstctl set-paused toggle && refstatus") },
   { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
   { MODKEY,                       XK_v,                      spawn,            SHCMD("st -e pulsemixer") },
