@@ -24,7 +24,7 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#006688";
 static const char col_green[]       = "#009922";
-static const unsigned int baralpha = 0x80;
+static const unsigned int baralpha = 0x90;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
   /*                   fg         bg         border   */
@@ -69,12 +69,13 @@ static const Rule rules[] = {
   { NULL,                      NULL,                    "Discord",             1 << 3,    1,           0,          -1 },
   { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    0,           0,          -1 },
   { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 3,    1,           0,          -1 },
-  { "Brave-browser",           "nmg.kissflow.com",      NULL,                  1 << 3,    1,           0,          -1 },
-  { "Brave-browser",           "app.clickup.com",       NULL,                  1 << 3,    1,           0,          -1 },
+  { "Gppgle-chrome",           "nmg.kissflow.com",      NULL,                  1 << 3,    1,           0,          -1 },
+  { "Google-chrome",           "app.clickup.com",       NULL,                  1 << 3,    1,           0,          -1 },
   { "Brave-browser",           "web.telegram.org",      NULL,                  1 << 3,    1,           0,          -1 },
   { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
   { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
   { "Sxiv",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
+  { "feh",                     "feh",                   NULL,                  0,         1,           1,          -1 },
   { "Gimp",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
   { "Inkscape",                NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
   { "mpv",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
@@ -151,7 +152,7 @@ static Key keys[] = {
   { MODKEY,                       XK_n,                      spawn,            SHCMD("dunstctl set-paused toggle && refstatus") },
   { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
   { MODKEY,                       XK_v,                      spawn,            SHCMD("st -e pulsemixer") },
-  { ControlMask,                  XK_Menu,                   spawn,            SHCMD("clipmenu 2>/dev/null") },
+  { ControlMask,                  XK_Menu,                   spawn,            SHCMD("clipmenu -i 2>/dev/null") },
   { 0,                            XK_Pause,                  spawn,            SHCMD("slock") },
   { MODKEY,                       XK_p,                      spawn,            SHCMD("mocp -M ~/.config/moc --toggle-pause && refstatus") },
   { MODKEY,                       XK_bracketleft,            spawn,            SHCMD("mocp -M ~/.config/moc --previous") },
@@ -174,6 +175,7 @@ static Key keys[] = {
   { MODKEY,                       XK_Left,                   spawn,            SHCMD("brightness down && xobctl show brightness") },
   { MODKEY,                       XK_Up,                     spawn,            SHCMD("audio up && xobctl show volume") },
   { MODKEY,                       XK_Down,                   spawn,            SHCMD("audio down && xobctl show volume") },
+  { MODKEY|ShiftMask,             XK_p,                      spawn,            SHCMD("genurlqr") },
 
   //XF86 keys
   { 0,                            XF86XK_MonBrightnessUp,    spawn,            SHCMD("brightness up && xobctl show brightness") },
