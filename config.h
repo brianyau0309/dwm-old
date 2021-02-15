@@ -18,19 +18,20 @@ static const char *fonts[]          = {
   "Symbols Nerd Font:pixelsize=13:antialias=true:autohint=true"
 };
 static const char dmenufont[]       = "CascadiaCode:pixelsize=14:antialias=true:autohint=true";
+static const char col_gray0[]       = "#161B1D";
 static const char col_gray1[]       = "#202020";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#006688";
-static const char col_green[]       = "#009922";
+static const char col_green[]       = "#44bbaa";
 static const unsigned int baralpha = 0x90;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
   /*                   fg         bg         border   */
-  [SchemeNorm]     = { col_gray3, col_gray1, col_gray2 },
+  [SchemeNorm]     = { col_gray3, col_gray1, col_gray1 },
   [SchemeTagsSel]  = { col_gray4, col_cyan,  col_cyan  },
-  [SchemeSel]      = { col_gray4, col_gray1, col_cyan  },
+  [SchemeSel]      = { col_gray4, col_gray1, col_green  },
 };
 static const unsigned int alphas[][3]      = {
   /*                   fg      bg        border     */
@@ -75,7 +76,7 @@ static const Rule rules[] = {
   { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
   { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
   { "Sxiv",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
-  { "feh",                     "feh",                   NULL,                  0,         1,           1,          -1 },
+  { "feh",                     "feh",                   NULL,                  0,         0,           1,          -1 },
   { "Gimp",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
   { "Inkscape",                NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
   { "mpv",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
@@ -126,15 +127,15 @@ static const char *termcmd[]  = { "st", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
 static char *statuscmds[] = {
-  "statuscmd.moc",
-  "statuscmd.wkon",
-  "statuscmd.storage",
-  "statuscmd.battery",
-  "statuscmd.date",
-  "statuscmd.audio",
-  "statuscmd.bluetooth",
-  "statuscmd.notify",
-  "statuscmd.internet",
+  "statuscmd.moc",       // x01
+  "statuscmd.wkon",      // x02
+  "statuscmd.storage",   // x03
+  "statuscmd.battery",   // x04
+  "statuscmd.date",      // x05
+  "statuscmd.audio",     // x06
+  "statuscmd.bluetooth", // x07
+  "statuscmd.notify",    // x08
+  "statuscmd.internet",  // x09
 };
 static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
