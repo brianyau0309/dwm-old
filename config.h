@@ -11,13 +11,13 @@ static const int smartgaps          = 1;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
-  "CascadiaCode:pixelsize=14:antialias=true:autohint=true",
-  "NotoSansCJKHK:pixelsize=14:antialias=true:autohint=true",
-  "JoyPixels:pixelsize=12:antialias=true:autohint=true",
-  "Symbola:pixelsize=12:antialias=true:autohint=true",
-  "Symbols Nerd Font:pixelsize=13:antialias=true:autohint=true"
+  "CascadiaCode:pixelsize=12.5:antialias=true:autohint=true",
+  "NotoSansCJKHK:pixelsize=12.5:antialias=true:autohint=true",
+  "JoyPixels:pixelsize=11:antialias=true:autohint=true",
+  "Symbola:pixelsize=11:antialias=true:autohint=true",
+  "Symbols Nerd Font:pixelsize=12:antialias=true:autohint=true"
 };
-static const char dmenufont[]       = "CascadiaCode:pixelsize=14:antialias=true:autohint=true";
+static const char dmenufont[]       = "CascadiaCode:pixelsize=13:antialias=true:autohint=true";
 static const char col_gray0[]       = "#161B1D";
 static const char col_gray1[]       = "#202020";
 static const char col_gray2[]       = "#444444";
@@ -51,15 +51,16 @@ static const Rule rules[] = {
   /* class                     instance                 title                  tags mask  switchtotag  isfloating  monitor */
   { NULL,                      NULL,                    "Picture in picture",  0,         0,           1,          -1 },
 	{ "st-256color",             "st-256color",           NULL,                  0,         0,           0,          -1 },
-  { "st-256color",             "st-256color",           "mocp",                0,         0,           1,          -1 },
-  { "st-256color",             "st-256color",           "pulsemixer",          0,         0,           1,          -1 },
-  { "st-256color",             "st-256color",           "bluetoothctl",        0,         0,           1,          -1 },
-  { "st-256color",             "st-256color",           "nnn",                 0,         0,           1,          -1 },
+  { NULL,                      NULL,                    "mocp",                0,         0,           1,          -1 },
+  { NULL,                      NULL,                    "pulsemixer",          0,         0,           1,          -1 },
+  { NULL,                      NULL,                    "bluetoothctl",        0,         0,           1,          -1 },
+  { NULL,                      NULL,                    "nnn",                 0,         0,           1,          -1 },
   { "Pulseeffects",            "pulseeffects",          NULL,                  0,         0,           1,          -1 },
   { "stacer",                  NULL,                    NULL,                  0,         0,           1,          -1 },
-  { "Galculator",              NULL,                    NULL,                  0,         0,           1,          -1 },
+  { "Galculator",              NULL,                    NULL,                  ~0,        0,           1,          -1 },
   { "Thunar",                  NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Pcmanfm",                 "pcmanfm",               NULL,                  0,         0,           1,          -1 },
+  { "kdeconnect.app",          NULL,                    NULL,                  0,         0,           1,          -1 },
   { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           1,          -1 },
   { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           0,          -1 },
   { "Google-chrome",           "google-chrome",         NULL,                  1 << 1,    1,           0,          -1 },
@@ -123,19 +124,21 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
 static char *statuscmds[] = {
-  "statuscmd.moc",       // x01
-  "statuscmd.wkon",      // x02
-  "statuscmd.storage",   // x03
-  "statuscmd.battery",   // x04
-  "statuscmd.date",      // x05
-  "statuscmd.audio",     // x06
-  "statuscmd.bluetooth", // x07
-  "statuscmd.notify",    // x08
-  "statuscmd.internet",  // x09
+  "statuscmd.keyboard",  // x01
+  "statuscmd.moc",       // x02
+  "statuscmd.wkon",      // x04
+  "statuscmd.storage",   // x04
+  "statuscmd.battery",   // x05
+  "statuscmd.date",      // x06
+  "statuscmd.audio",     // x07
+  "statuscmd.bluetooth", // x08
+  "statuscmd.notify",    // x09
+  "",                    // x0A cannot be used since \x0A is equal to \n
+  "statuscmd.internet",  // x0B
 };
 static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
@@ -144,15 +147,16 @@ static Key keys[] = {
   /* modifier                     key                        function          argument */
   { MODKEY,                       XK_semicolon,              spawn,            {.v = dmenucmd } },
   { MODKEY|AltMask,               XK_t,                      spawn,            {.v = termcmd } },
-  { MODKEY,                       XK_t,                      spawn,            SHCMD("WKON_PATH=\"$(wkon anchor)\" st") },
+  { MODKEY,                       XK_t,                      spawn,            SHCMD("WKON_PATH=\"$(wkon anchor)\" alacritty") },
 
   // Open
   { MODKEY,                       XK_w,                      spawn,            SHCMD("$BROWSER") },
   { MODKEY|ShiftMask,             XK_w,                      spawn,            SHCMD("$WBROWSER") },
-  { MODKEY,                       XK_Return,                 spawn,            SHCMD("st -e nnn -erx ~") },
+  { MODKEY,                       XK_Return,                 spawn,            SHCMD("alacritty -t nnn -e nnn -erx ~") },
   { MODKEY,                       XK_n,                      spawn,            SHCMD("dunstctl set-paused toggle && refstatus") },
-  { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("st -e mocp -M ~/.config/moc") },
-  { MODKEY,                       XK_v,                      spawn,            SHCMD("st -e pulsemixer") },
+  { MODKEY|ControlMask,           XK_m,                      spawn,            SHCMD("alacritty -t mocp -e mocp -M ~/.config/moc") },
+  { MODKEY,                       XK_v,                      spawn,            SHCMD("alacritty -t pulsemixer -e pulsemixer") },
+  { MODKEY,                       XK_c,                      spawn,            SHCMD("clipmenu -i 2>/dev/null") },
   { ControlMask,                  XK_Menu,                   spawn,            SHCMD("clipmenu -i 2>/dev/null") },
   { 0,                            XK_Pause,                  spawn,            SHCMD("slock") },
   { MODKEY,                       XK_p,                      spawn,            SHCMD("mocp -M ~/.config/moc --toggle-pause && refstatus") },
@@ -162,7 +166,7 @@ static Key keys[] = {
   // Script
   { MODKEY,                       XK_e,                      spawn,            SHCMD("emoji") },
   { MODKEY,                       XK_r,                      spawn,            SHCMD("refstatus") },
-  { MODKEY,                       XK_c,                      spawn,            SHCMD("~/.config/dmenuquick/dmenuquick") },
+  // { MODKEY,                       XK_c,                      spawn,            SHCMD("~/.config/dmenuquick/dmenuquick") },
   { MODKEY,                       XK_s,                      spawn,            SHCMD("dmenussh") },
   { MODKEY,                       XK_i,                      spawn,            SHCMD("dmenuwifi") },
   { MODKEY,                       XK_d,                      spawn,            SHCMD("dmenudisplay") },
