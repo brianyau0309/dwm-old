@@ -3,10 +3,10 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 3;        /* horiz inner gap between windows */
-static const unsigned int gappiv    = 3;        /* vert inner gap between windows */
-static const unsigned int gappoh    = 3;        /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 3;        /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 21;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 21;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 21;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 21;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -17,21 +17,23 @@ static const char *fonts[]          = {
   "Symbola:pixelsize=11:antialias=true:autohint=true",
   "Symbols Nerd Font:pixelsize=12:antialias=true:autohint=true"
 };
-static const char dmenufont[]       = "CascadiaCode:pixelsize=13:antialias=true:autohint=true";
+static const char dmenufont[]       = "CascadiaCode:pixelsize=12.5:antialias=true:autohint=true";
+static const char col_black[]       = "#000000";
 static const char col_gray0[]       = "#161B1D";
 static const char col_gray1[]       = "#202020";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#006688";
+static const char col_green0[]      = "#226655";
 static const char col_green[]       = "#44bbaa";
 static const unsigned int baralpha = 0x90;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
-  /*                   fg         bg         border   */
-  [SchemeNorm]     = { col_gray3, col_gray1, col_gray1 },
-  [SchemeTagsSel]  = { col_gray4, col_cyan,  col_cyan  },
-  [SchemeSel]      = { col_gray4, col_gray1, col_green  },
+  /*                   fg         bg          border   */
+  [SchemeNorm]     = { col_gray3, col_gray1,  col_gray1  },
+  [SchemeTagsSel]  = { col_gray4, col_green0, col_green0 },
+  [SchemeSel]      = { col_gray4, col_gray1,  col_green  },
 };
 static const unsigned int alphas[][3]      = {
   /*                   fg      bg        border     */
@@ -48,51 +50,55 @@ static const Rule rules[] = {
    *	WM_CLASS(STRING) = instance, class
    *	WM_NAME(STRING) = title
    */
-  /* class                     instance                 title                  tags mask  switchtotag  isfloating  monitor */
-  { NULL,                      NULL,                    "Picture in picture",  0,         0,           1,          -1 },
-	{ "st-256color",             "st-256color",           NULL,                  0,         0,           0,          -1 },
-  { NULL,                      NULL,                    "mocp",                0,         0,           1,          -1 },
-  { NULL,                      NULL,                    "pulsemixer",          0,         0,           1,          -1 },
-  { NULL,                      NULL,                    "bluetoothctl",        0,         0,           1,          -1 },
-  { NULL,                      NULL,                    "nnn",                 0,         0,           1,          -1 },
-  { "Pulseeffects",            "pulseeffects",          NULL,                  0,         0,           1,          -1 },
-  { "stacer",                  NULL,                    NULL,                  0,         0,           1,          -1 },
-  { "Galculator",              NULL,                    NULL,                  ~0,        0,           1,          -1 },
-  { "Thunar",                  NULL,                    NULL,                  0,         0,           1,          -1 },
-  { "Pcmanfm",                 "pcmanfm",               NULL,                  0,         0,           1,          -1 },
-  { "kdeconnect.app",          NULL,                    NULL,                  0,         0,           1,          -1 },
-  { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           1,          -1 },
-  { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           0,          -1 },
-  { "Google-chrome",           "google-chrome",         NULL,                  1 << 1,    1,           0,          -1 },
-  { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 2,    1,           0,          -1 },
-  { "Thunderbird",             "Mail",                  NULL,                  1 << 2,    0,           0,          -1 },
-  { "Thunderbird",             "Calendar",              NULL,                  0,         0,           1,          -1 },
-  { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           1,          -1 },
-  { NULL,                      NULL,                    "Discord",             1 << 3,    1,           0,          -1 },
-  { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    0,           0,          -1 },
-  { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 3,    1,           0,          -1 },
-  { "Gppgle-chrome",           "nmg.kissflow.com",      NULL,                  1 << 3,    1,           0,          -1 },
-  { "Google-chrome",           "app.clickup.com",       NULL,                  1 << 3,    1,           0,          -1 },
-  { "Brave-browser",           "web.telegram.org",      NULL,                  1 << 3,    1,           0,          -1 },
-  { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
-  { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,          -1 },
-  { "Sxiv",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
-  { "feh",                     "feh",                   NULL,                  0,         0,           1,          -1 },
-  { "Gimp",                    NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
-  { "Inkscape",                NULL,                    NULL,                  1 << 5,    1,           0,          -1 },
-  { "mpv",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
-  { "obs",                     NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
-  { "openshot",                NULL,                    NULL,                  1 << 6,    1,           0,          -1 },
-  { "Steam",                   "Steam",                 NULL,                  1 << 7,    1,           1,          -1 },
-  { "parsecd",                 "parsecd",               NULL,                  1 << 7,    1,           1,          -1 },
-  { NULL,                      "Lutris",                NULL,                  1 << 7,    1,           1,          -1 },
-  { "minecraft-launcher",      NULL,                    NULL,                  1 << 7,    1,           1,          -1 },
+  /* class                     instance                 title                  tags mask  switchtotag  switchtourgent  isfloating  monitor */
+  { NULL,                      NULL,                    "Picture in picture",  ~0,        0,           0,              1,          -1 },
+	{ "st-256color",             "st-256color",           NULL,                  0,         0,           0,              0,          -1 },
+	{ "Alacritty",               "Alacritty",             NULL,                  0,         0,           0,              0,          -1 },
+  { NULL,                      NULL,                    "mocp",                0,         0,           0,              1,          -1 },
+  { NULL,                      NULL,                    "pulsemixer",          0,         0,           0,              1,          -1 },
+  { NULL,                      NULL,                    "bluetoothctl",        0,         0,           0,              1,          -1 },
+  { NULL,                      NULL,                    "nnn",                 0,         0,           0,              1,          -1 },
+  { "Pulseeffects",            "pulseeffects",          NULL,                  0,         0,           0,              1,          -1 },
+  { "stacer",                  NULL,                    NULL,                  0,         0,           0,              1,          -1 },
+  { "Galculator",              NULL,                    NULL,                  ~0,        0,           0,              1,          -1 },
+  { "Thunar",                  NULL,                    NULL,                  0,         0,           0,              1,          -1 },
+  { "Org.gnome.Nautilus",      NULL,                    NULL,                  0,         0,           0,              1,          -1 },
+  { "Pcmanfm",                 "pcmanfm",               NULL,                  0,         0,           0,              1,          -1 },
+  { "kdeconnect.app",          NULL,                    NULL,                  0,         0,           0,              1,          -1 },
+  { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           0,              1,          -1 },
+  { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           1,              0,          -1 },
+  { "Google-chrome",           "google-chrome",         NULL,                  1 << 1,    1,           1,              0,          -1 },
+  { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 2,    1,           0,              0,          -1 },
+  { "Thunderbird",             "Mail",                  NULL,                  1 << 2,    0,           0,              0,          -1 },
+  { "Thunderbird",             "Calendar",              NULL,                  0,         0,           0,              1,          -1 },
+  { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           0,              1,          -1 },
+  { NULL,                      NULL,                    "Discord",             1 << 3,    1,           0,              0,          -1 },
+  { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    0,           0,              0,          -1 },
+  { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 3,    1,           0,              0,          -1 },
+  { "Gppgle-chrome",           "nmg.kissflow.com",      NULL,                  1 << 3,    1,           0,              0,          -1 },
+  { "Google-chrome",           "app.clickup.com",       NULL,                  1 << 4,    0,           0,              0,          -1 },
+  { "ClickUp Desktop",         NULL,                    NULL,                  1 << 4,    0,           0,              0,          -1 },
+  { "Brave-browser",           "web.telegram.org",      NULL,                  1 << 3,    1,           0,              0,          -1 },
+  { "Zathura",                 NULL,                    NULL,                  1 << 4,    1,           0,              0,          -1 },
+  { "libreoffice-startcenter", NULL,                    NULL,                  1 << 4,    1,           0,              0,          -1 },
+  { "obsidian",                "obsidian",              "Obsidian",            1 << 4,    1,           0,              0,          -1 },
+  { "Sxiv",                    NULL,                    NULL,                  1 << 5,    1,           0,              0,          -1 },
+  { "feh",                     "feh",                   NULL,                  0,         0,           0,              1,          -1 },
+  { "Gimp",                    NULL,                    NULL,                  1 << 5,    1,           0,              0,          -1 },
+  { "Inkscape",                NULL,                    NULL,                  1 << 5,    1,           0,              0,          -1 },
+  { "mpv",                     NULL,                    NULL,                  1 << 6,    1,           0,              0,          -1 },
+  { "obs",                     "obs",                   "OBS",                 1 << 6,    1,           0,              0,          -1 },
+  { "openshot",                NULL,                    NULL,                  1 << 6,    1,           0,              0,          -1 },
+  { "Steam",                   "Steam",                 NULL,                  1 << 7,    1,           0,              1,          -1 },
+  { "parsecd",                 "parsecd",               NULL,                  1 << 7,    1,           0,              1,          -1 },
+  { NULL,                      "Lutris",                NULL,                  1 << 7,    1,           0,              1,          -1 },
+  { "minecraft-launcher",      NULL,                    NULL,                  1 << 7,    1,           0,              1,          -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 #include "fibonacci.c"
 
@@ -123,26 +129,27 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_black, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
 static char *statuscmds[] = {
-  "statuscmd.keyboard",  // x01
-  "statuscmd.moc",       // x02
-  "statuscmd.wkon",      // x04
-  "statuscmd.storage",   // x04
-  "statuscmd.battery",   // x05
-  "statuscmd.date",      // x06
-  "statuscmd.audio",     // x07
-  "statuscmd.bluetooth", // x08
-  "statuscmd.notify",    // x09
+  "moc.statuscmd",       // x01
+  "wkon.statuscmd",      // x02
+  "storage.statuscmd",   // x03
+  "date.statuscmd",      // x04
+  "battery.statuscmd",   // x05
+  "keyboard.statuscmd",  // x06
+  "audio.statuscmd",     // x07
+  "notify.statuscmd",    // x08
+  "bluetooth.statuscmd", // x09
   "",                    // x0A cannot be used since \x0A is equal to \n
-  "statuscmd.internet",  // x0B
+  "internet.statuscmd",  // x0B
 };
 static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
 #include <X11/XF86keysym.h>
+#include "focusurgent.c"
 static Key keys[] = {
   /* modifier                     key                        function          argument */
   { MODKEY,                       XK_semicolon,              spawn,            {.v = dmenucmd } },
@@ -188,6 +195,10 @@ static Key keys[] = {
   { 0,                            XF86XK_AudioMute,          spawn,            SHCMD("audio toggle && xobctl show volume") },
   { 0,                            XF86XK_AudioRaiseVolume,   spawn,            SHCMD("audio up && xobctl show volume") },
   { 0,                            XF86XK_AudioLowerVolume,   spawn,            SHCMD("audio down && xobctl show volume") },
+  { 0,                            XF86XK_AudioPlay,          spawn,            SHCMD("playerctl play-pause") },
+  { 0,                            XF86XK_AudioPause,         spawn,            SHCMD("playerctl pause") },
+  { 0,                            XF86XK_AudioNext,          spawn,            SHCMD("playerctl next") },
+  { 0,                            XF86XK_AudioPrev,          spawn,            SHCMD("playerctl previous") },
 
   // Window Control
   { MODKEY|ShiftMask,             XK_b,                      togglebar,        {0} },
@@ -249,6 +260,7 @@ static Key keys[] = {
   TAGKEYS(                        XK_7,                                        6)
   TAGKEYS(                        XK_8,                                        7)
   TAGKEYS(                        XK_9,                                        8)
+  { MODKEY|ShiftMask,             XK_u,                      focusurgent,      {0} },
 
   // Quit
   { MODKEY|ShiftMask,             XK_F12,                    quit,             {0} },
