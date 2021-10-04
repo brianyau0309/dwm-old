@@ -58,6 +58,7 @@ static const Rule rules[] = {
   { NULL,                      NULL,                    "pulsemixer",          0,         0,           0,              1,          -1 },
   { NULL,                      NULL,                    "bluetoothctl",        0,         0,           0,              1,          -1 },
   { NULL,                      NULL,                    "nnn",                 0,         0,           0,              1,          -1 },
+	{"Blueman-manager",          "blueman-manager",       NULL,                  0,         0,           0,              1,          -1 },
   { "Pulseeffects",            "pulseeffects",          NULL,                  0,         0,           0,              1,          -1 },
   { "stacer",                  NULL,                    NULL,                  0,         0,           0,              1,          -1 },
   { "Galculator",              NULL,                    NULL,                  ~0,        0,           0,              1,          -1 },
@@ -134,17 +135,19 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
 static char *statuscmds[] = {
-  "moc.statuscmd",       // x01
-  "wkon.statuscmd",      // x02
-  "storage.statuscmd",   // x03
-  "date.statuscmd",      // x04
-  "battery.statuscmd",   // x05
-  "keyboard.statuscmd",  // x06
-  "audio.statuscmd",     // x07
-  "notify.statuscmd",    // x08
-  "bluetooth.statuscmd", // x09
-  "",                    // x0A cannot be used since \x0A is equal to \n
-  "internet.statuscmd",  // x0B
+  "moc.statuscmd",        // x01
+  "wkon.statuscmd",       // x02
+  "storage.statuscmd",    // x03
+  "date.statuscmd",       // x04
+  "battery.statuscmd",    // x05
+  "keyboard.statuscmd",   // x06
+  "kdeconnect.statuscmd", // x07
+  "syncthing.statuscmd",  // x08
+  "bluetooth.statuscmd",  // x09
+  "",                     // x0A cannot be used since \x0A is equal to \n
+  "notify.statuscmd",     // x0B
+  "audio.statuscmd",      // x0C
+  "internet.statuscmd",   // x0D
 };
 static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
@@ -165,7 +168,7 @@ static Key keys[] = {
   { MODKEY,                       XK_v,                      spawn,            SHCMD("alacritty -t pulsemixer -e pulsemixer") },
   { MODKEY,                       XK_c,                      spawn,            SHCMD("clipmenu -i 2>/dev/null") },
   { ControlMask,                  XK_Menu,                   spawn,            SHCMD("clipmenu -i 2>/dev/null") },
-  { 0,                            XK_Pause,                  spawn,            SHCMD("slock") },
+  { 0,                            XK_Pause,                  spawn,            SHCMD("betterlockscreen -l >/dev/null") },
   { MODKEY,                       XK_p,                      spawn,            SHCMD("mocp -M ~/.config/moc --toggle-pause && refstatus") },
   { MODKEY,                       XK_bracketleft,            spawn,            SHCMD("mocp -M ~/.config/moc --previous") },
   { MODKEY,                       XK_bracketright,           spawn,            SHCMD("mocp -M ~/.config/moc --next") },
