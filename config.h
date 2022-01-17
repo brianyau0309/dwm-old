@@ -58,7 +58,7 @@ static const Rule rules[] = {
   { NULL,                      NULL,                    "pulsemixer",          0,         0,           0,              1,          -1 },
   { NULL,                      NULL,                    "bluetoothctl",        0,         0,           0,              1,          -1 },
   { NULL,                      NULL,                    "nnn",                 0,         0,           0,              1,          -1 },
-	{"Blueman-manager",          "blueman-manager",       NULL,                  0,         0,           0,              1,          -1 },
+	{ "Blueman-manager",         "blueman-manager",       NULL,                  0,         0,           0,              1,          -1 },
   { "Pulseeffects",            "pulseeffects",          NULL,                  0,         0,           0,              1,          -1 },
   { "stacer",                  NULL,                    NULL,                  0,         0,           0,              1,          -1 },
   { "Galculator",              NULL,                    NULL,                  ~0,        0,           0,              1,          -1 },
@@ -67,9 +67,11 @@ static const Rule rules[] = {
   { "Pcmanfm",                 "pcmanfm",               NULL,                  0,         0,           0,              1,          -1 },
   { "kdeconnect.app",          NULL,                    NULL,                  0,         0,           0,              1,          -1 },
   { "Dragon-drag-and-drop",    NULL,                    NULL,                  ~0,        0,           0,              1,          -1 },
+  { "DBeaver",                 "DBeaver",               NULL,                  1 << 1,    1,           0,              0,          -1 },
   { "Brave-browser",           "brave-browser",         NULL,                  1 << 1,    1,           1,              0,          -1 },
   { "Google-chrome",           "google-chrome",         NULL,                  1 << 1,    1,           1,              0,          -1 },
   { "Brave-browser",           "mail.google.com__mail", NULL,                  1 << 2,    1,           0,              0,          -1 },
+  { "Postman",                 "postman",               NULL,                  1 << 2,    0,           0,              0,          -1 },
   { "Thunderbird",             "Mail",                  NULL,                  1 << 2,    0,           0,              0,          -1 },
   { "Thunderbird",             "Calendar",              NULL,                  0,         0,           0,              1,          -1 },
   { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           0,              1,          -1 },
@@ -100,6 +102,7 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #include "fibonacci.c"
 
@@ -132,6 +135,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_black, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
+static const char *holdSuper[]  = { "holdKey", "Super_L", "5", NULL };
 
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
 static char *statuscmds[] = {
@@ -278,8 +282,8 @@ static Button buttons[] = {
   { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
   { ClkLtSymbol,          0,              Button2,        spawn,          SHCMD("power") },
   { ClkWinTitle,          0,              Button1,        zoom,           {0} },
-  { ClkWinTitle,          0,              Button3,        spawn,          {.v = termcmd } },
-  { ClkWinTitle,          0,              Button2,        spawn,          {.v = dmenucmd } },
+  { ClkWinTitle,          0,              Button3,        spawn,          {.v = holdSuper } },
+  { ClkWinTitle,          0,              Button2,        togglefloating, {0} },
 	{ ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
