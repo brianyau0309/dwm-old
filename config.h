@@ -76,7 +76,7 @@ static const Rule rules[] = {
   { "Thunderbird",             "Calendar",              NULL,                  0,         0,           0,              1,          -1 },
   { "Thunderbird",             "Msgcompose",            NULL,                  0,         0,           0,              1,          -1 },
   { NULL,                      NULL,                    "Discord",             1 << 3,    1,           0,              0,          -1 },
-  { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    0,           0,              0,          -1 },
+  { "TelegramDesktop",         NULL,                    NULL,                  1 << 3,    0,           1,              0,          -1 },
   { "Brave-browser",           "web.whatsapp.com",      NULL,                  1 << 3,    1,           0,              0,          -1 },
   { "Gppgle-chrome",           "nmg.kissflow.com",      NULL,                  1 << 3,    1,           0,              0,          -1 },
   { "Google-chrome",           "app.clickup.com",       NULL,                  1 << 4,    0,           0,              0,          -1 },
@@ -160,8 +160,8 @@ static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 static Key keys[] = {
   /* modifier                     key                        function          argument */
   { MODKEY,                       XK_semicolon,              spawn,            {.v = dmenucmd } },
-  { MODKEY|AltMask,               XK_t,                      spawn,            {.v = termcmd } },
-  { MODKEY,                       XK_t,                      spawn,            SHCMD("WKON_PATH=\"$(wkon anchor)\" alacritty") },
+  { MODKEY,                       XK_t,                      spawn,            {.v = termcmd } },
+  /* { MODKEY,                       XK_t,                      spawn,            SHCMD("WKON_PATH=\"$(wkon anchor)\" alacritty") }, */
 
   // Open
   { MODKEY,                       XK_w,                      spawn,            SHCMD("$BROWSER") },
@@ -214,7 +214,7 @@ static Key keys[] = {
   { MODKEY,                       XK_h,                      setmfact,         {.f = -0.05} },
   { MODKEY,                       XK_l,                      setmfact,         {.f = +0.05} },
   { MODKEY,                       XK_z,                      zoom,             {0} },
-  { AltMask,                      XK_Tab,                    view,             {0} },
+  /* { AltMask,                      XK_Tab,                    view,             {0} }, */
   { MODKEY,                       XK_Tab,                    shiftviewclients, { .i = +1 } },
   { MODKEY|ShiftMask,             XK_Tab,                    shiftviewclients, { .i = -1 } },
   { MODKEY,                       XK_q,                      killclient,       {0} },
@@ -283,7 +283,7 @@ static Button buttons[] = {
   { ClkLtSymbol,          0,              Button2,        spawn,          SHCMD("power") },
   { ClkWinTitle,          0,              Button1,        zoom,           {0} },
   { ClkWinTitle,          0,              Button3,        spawn,          {.v = holdSuper } },
-  { ClkWinTitle,          0,              Button2,        togglefloating, {0} },
+  { ClkWinTitle,          0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
